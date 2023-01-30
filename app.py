@@ -1,8 +1,10 @@
 import plotly.graph_objects as go
-
+import plotly.io as pio
 import pandas as pd 
 import chart_studio.tools as tls
 import chart_studio.plotly as py
+
+
 #Create Dataframe for the visuals
 df = pd.DataFrame({"spacing":[1, 3, 5,  1, 3, 5,  1, 3, 5, 
                               1, 3, 5 ,1, 3, 5 , 1, 3, 5, 
@@ -119,7 +121,8 @@ fig.update_layout(height=450,bargap=0.2, title="Child Abuse", title_x=0.5,
                                
                               ]) 
 
-fig.show()
+# fig.show()
 
-fig.write_html("child_abuse.html", auto_open=True)
+# fig.write_html("child_abuse.html", auto_open=True)
 
+pio.write_html(fig, file='child_abuse.html', auto_open=True)
