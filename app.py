@@ -123,6 +123,6 @@ fig.update_layout(height=450,bargap=0.2, title="Child Abuse", title_x=0.5,
 
 # fig.show()
 
-# fig.write_html("child_abuse.html", auto_open=True)
+# fig.write_html("index.html", auto_open=True)
 
-pio.write_html(fig, file='child_abuse.html', auto_open=True)
+pio.write_html(fig, file='index.html', auto_open=True)
