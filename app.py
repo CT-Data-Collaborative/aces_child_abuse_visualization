@@ -4,6 +4,8 @@ import pandas as pd
 import chart_studio.tools as tls
 import chart_studio.plotly as py
 
+#hide the plotly logo
+config = {'displaylogo': False}
 
 #Create Dataframe for the visuals
 df = pd.DataFrame({"spacing":[1, 3, 5,  1, 3, 5,  1, 3, 5, 
@@ -24,10 +26,16 @@ df = pd.DataFrame({"spacing":[1, 3, 5,  1, 3, 5,  1, 3, 5,
                                  2.4, 0.6, 1.2,  6.7, 3, 4.8,  8.2, 6.8, 8.3, 
                                  1.9, 0.7, 1.4],
                    
-                   "breakdown":["Insulted", "Hit/Kicked", "Sexually Abused", "Insulted", "Hit/Kicked", "Sexually Abused", "Insulted", "Hit/Kicked", "Sexually Abused",
-                                "Insulted", "Hit/Kicked", "Sexually Abused", "Insulted", "Hit/Kicked", "Sexually Abused", "Insulted", "Hit/Kicked", "Sexually Abused",
-                                "Insulted", "Hit/Kicked", "Sexually Abused", "Insulted", "Hit/Kicked", "Sexually Abused", "Insulted", "Hit/Kicked", "Sexually Abused",
-                                "Insulted", "Hit/Kicked", "Sexually Abused"]
+                   "breakdown":["Being sexually abused by a person at least five years older","Being hit, kicked, or physically hurt by a parent or caregiver","Being insulted or put down by a parent or caregiver", 
+                                "Being sexually abused by a person at least five years older","Being hit, kicked, or physically hurt by a parent or caregiver","Being insulted or put down by a parent or caregiver", 
+                                "Being sexually abused by a person at least five years older","Being hit, kicked, or physically hurt by a parent or caregiver","Being insulted or put down by a parent or caregiver",
+                                "Being sexually abused by a person at least five years older","Being hit, kicked, or physically hurt by a parent or caregiver","Being insulted or put down by a parent or caregiver", 
+                                "Being sexually abused by a person at least five years older","Being hit, kicked, or physically hurt by a parent or caregiver","Being insulted or put down by a parent or caregiver", 
+                                "Being sexually abused by a person at least five years older","Being hit, kicked, or physically hurt by a parent or caregiver","Being insulted or put down by a parent or caregiver",
+                                "Being sexually abused by a person at least five years older","Being hit, kicked, or physically hurt by a parent or caregiver","Being insulted or put down by a parent or caregiver", 
+                                "Being sexually abused by a person at least five years older","Being hit, kicked, or physically hurt by a parent or caregiver","Being insulted or put down by a parent or caregiver", 
+                                "Being sexually abused by a person at least five years older","Being hit, kicked, or physically hurt by a parent or caregiver","Being insulted or put down by a parent or caregiver",
+                                "Being sexually abused by a person at least five years older","Being hit, kicked, or physically hurt by a parent or caregiver","Being insulted or put down by a parent or caregiver"]
                    })
 
 # print(df)
@@ -35,17 +43,17 @@ df = pd.DataFrame({"spacing":[1, 3, 5,  1, 3, 5,  1, 3, 5,
 #Set paramaters for Bar charts
 fig = go.Figure()
 fig.add_trace(go.Bar(
-        x=df.breakdown,
-        y=df.data_values,
-
-        error_y=dict(
+        x=df.data_values,
+        y=df.breakdown[0:3],
+        orientation="h",
+        error_x=dict(
             type='data',
             symmetric=False,
             array=df.top_error,
             arrayminus=df.bottom_error)
         ))
 
-fig.update_traces(visible= True, selector=dict(type='bar'))
+fig.update_traces( selector=dict(type='bar'))
 
 
 cols =["data_values"]
@@ -60,6 +68,7 @@ male = [list(df[item][18:21])  for item in cols]
 lgbt = [list(df[item][21:24])  for item in cols]
 unsure = [list(df[item][24:27])  for item in cols]
 hetero = [list(df[item][27:30])  for item in cols]
+
 # print("statewide: ", statewide)
 # print("asian: ", asian)
 # print("black: ", black)
@@ -72,45 +81,44 @@ hetero = [list(df[item][27:30])  for item in cols]
 # print("hetero: ", hetero)
 
 # Chart should display only the chart for the specified button, and can toggle between other charts, going back to the original 
-dropdown1 =  dict(method = "restyle",
-                  args = [{'y': statewide}],
+dropdown1 =  dict(method = "update", 
+                  args = [{'x': statewide}],
                 # args = [{'y': statewide, 'x': statewidex}],
                 label = "Statewide")
 
-dropdown2 =  dict(method = "restyle",
-                args = [{'y': asian}],
+dropdown2 =  dict(method = "update",
+                args = [{'x': asian}],
                 label = "Asian")
 
-dropdown3 =  dict(method = "restyle",
-                args = [{'y': black}],
+dropdown3 =  dict(method = "update",
+                args = [{'x': black}],
                 label = "Black")
 
-dropdown4 =  dict(method = "restyle",
-                args = [{'y': hispa}],
+dropdown4 =  dict(method = "update",
+                args = [{'x': hispa}],
                 label = "Hispanic")
 
-dropdown5 =  dict(method = "restyle",
-                args = [{'y': white}],
+dropdown5 =  dict(method = "update",
+                args = [{'x': white}],
                 label = "White")
 
-dropdown6 =  dict(method = "restyle",
-                args = [{'y': female}],
+dropdown6 =  dict(method = "update",
+                args = [{'x': female}],
                 label = "Female")
-
-dropdown7 =  dict(method = "restyle",
-                args = [{'y': male}],
+dropdown7 =  dict(method = "update",
+                args = [{'x': male}],
                 label = "Male")
 
-dropdown8 =  dict(method = "restyle",
-                args = [{'y': lgbt}],
+dropdown8 =  dict(method = "update",
+                args = [{'x': lgbt}],
                 label = "Gay/Lesbian/Bisexual")
 
-dropdown9 =  dict(method = "restyle",
-                args = [{'y': unsure}],
+dropdown9 =  dict(method = "update",
+                args = [{'x': unsure}],
                 label = "Unsure")
 
-dropdown10 =  dict(method = "restyle",
-                args = [{'y': hetero}],
+dropdown10 =  dict(method = "update",
+                args = [{'x': hetero}],
                 label = "Heterosexual")
 
 fig.update_layout(height=450,bargap=0.2, title="Child Abuse", title_x=0.5,
@@ -119,10 +127,12 @@ fig.update_layout(height=450,bargap=0.2, title="Child Abuse", title_x=0.5,
                                              dropdown5, dropdown6, dropdown7 ,dropdown8 ,
                                              dropdown9, dropdown10])
                                
-                              ]) 
+                              ])
 
 # fig.show()
 
 # fig.write_html("index.html", auto_open=True)
 
-pio.write_html(fig, file='index.html', auto_open=True)
+pio.write_html(fig, config=config, file='index.html', auto_open=True)
+
+# tls.get_embed('https://ct-data-collaborative.github.io/aces_visuals/')
