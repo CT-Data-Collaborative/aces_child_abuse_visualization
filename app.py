@@ -82,8 +82,7 @@ hetero = [list(df[item][27:30])  for item in cols]
 
 # Chart should display only the chart for the specified button, and can toggle between other charts, going back to the original 
 dropdown1 =  dict(method = "update", 
-                  args = [{'x': statewide}],
-                # args = [{'y': statewide, 'x': statewidex}],
+                args = [{'x': statewide}],
                 label = "Statewide")
 
 dropdown2 =  dict(method = "update",
